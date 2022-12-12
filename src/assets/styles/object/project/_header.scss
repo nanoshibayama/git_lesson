@@ -1,0 +1,9 @@
+@use '../../global' as *;
+@use 'sass:math';
+
+.p-header {
+}
+
+.txt {
+  @include fz-camp(12, 16);
+}

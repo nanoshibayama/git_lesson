@@ -1,0 +1,56 @@
+//- breakpoints
+- var sm   = "576"
+- var md   = "768"
+- var lg   = "992"
+- var xl  = "1200"
+- var xxl = "1400"
+
+mixin picture-media(options)
+  - options = options || {};
+  picture
+    source(
+      type="image/webp"
+      media=`(max-width:${options.media - 1}px)`
+      srcset=`${options.path}${options.name}_sp.webp`
+    )
+    source(
+      type="image/webp"
+      media=`(min-width:${options.media}px)`
+      srcset=`${options.path}${options.name}_pc.webp`
+    )
+    if(options.lazy)
+      img(src=`${options.path}${options.name}_pc.${options.type}` alt=(options.alt || '') loading="lazy" decoding="async" width=`${options.width}` height=`${options.height}`)
+    else
+      img(src=`${options.path}${options.name}_pc.${options.type}` alt=(options.alt || '') width=`${options.width}` height=`${options.height}`)
+
+//- +picture-media({
+//-   media: md,
+//-   path: '/assets/images/',
+//-   name: 'filename',
+//-   type: 'jpg',
+//-   alt: 'alt',
+//-   width: 100,
+//-   height: 100,
+//-   lazy: true
+//- })
+
+mixin picture(options)
+  - options = options || {};
+  picture
+    source(
+      type="image/webp" srcset=`${options.path}${options.name}.webp`
+    )
+    if(options.lazy)
+      img(src=`${options.path}${options.name}.${options.type}` alt=(options.alt || '') loading="lazy" decoding="async" width=`${options.width}` height=`${options.height}`)
+    else
+      img(src=`${options.path}${options.name}.${options.type}` alt=(options.alt || '') width=`${options.width}` height=`${options.height}`)
+
+//- +picture({
+//-   path: '/assets/images/',
+//-   name: 'filename',
+//-   type: 'png',
+//-   alt: 'alt',
+//-   width: 100,
+//-   height: 100,
+//-   lazy: true
+//- })
